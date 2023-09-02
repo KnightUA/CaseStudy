@@ -1,6 +1,6 @@
 package ua.shtest.casestudy.data.remote.service
 
-import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 import retrofit2.Retrofit
 import ua.shtest.casestudy.data.remote.api.ItemsApi
 import ua.shtest.casestudy.data.remote.model.ItemsResponse
@@ -18,5 +18,5 @@ class ItemsService @Inject constructor(retrofit: Retrofit) : ItemsApi {
 
     private val itemsApi by lazy { retrofit.create(ItemsApi::class.java) }
 
-    override fun fetchItems(): Observable<ItemsResponse> = itemsApi.fetchItems()
+    override fun fetchItems(): Single<ItemsResponse> = itemsApi.fetchItems()
 }

@@ -1,6 +1,6 @@
 package ua.shtest.casestudy.data.remote.api
 
-import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import ua.shtest.casestudy.data.remote.model.ItemsResponse
 
@@ -17,5 +17,5 @@ interface ItemsApi {
     }
 
     @GET(ITEMS_ENDPOINT)
-    fun fetchItems(): Observable<ItemsResponse>
+    fun fetchItems(): Single<ItemsResponse>
 }

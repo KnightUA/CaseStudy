@@ -12,11 +12,13 @@ data class ItemApiModel(
     @SerializedName("MacAddress")
     val macAddress: String,
     @SerializedName("PK_Device")
-    val pkDevice: Int,
+    val pkDevice: Long,
     @SerializedName("PK_DeviceSubType")
     val pkDeviceSubType: Int,
     @SerializedName("PK_DeviceType")
     val pkDeviceType: Int,
+    @SerializedName("PK_Account")
+    val pkAccount: Long,
     @SerializedName("Platform")
     val platform: String,
     @SerializedName("Server_Account")
