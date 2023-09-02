@@ -19,6 +19,10 @@ android {
     }
 
     buildTypes {
+        all {
+            buildConfigField("String", "BASE_URL", "\"https://veramobile.mios.com/\"")
+        }
+
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -30,6 +34,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 
     compileOptions {
