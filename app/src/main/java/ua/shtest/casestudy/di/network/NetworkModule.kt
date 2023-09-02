@@ -1,4 +1,4 @@
-package ua.shtest.casestudy.di
+package ua.shtest.casestudy.di.network
 
 import dagger.Module
 import dagger.Provides

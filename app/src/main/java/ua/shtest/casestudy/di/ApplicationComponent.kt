@@ -2,6 +2,9 @@ package ua.shtest.casestudy.di
 
 import dagger.Component
 import ua.shtest.casestudy.application.CaseStudyApplication
+import ua.shtest.casestudy.di.network.NetworkModule
+import ua.shtest.casestudy.di.viewmodel.ViewModelModule
+import ua.shtest.casestudy.ui.SingleActivity
 import javax.inject.Singleton
 
 /**
@@ -11,7 +14,8 @@ import javax.inject.Singleton
  */
 
 @Singleton
-@Component(modules = [NetworkModule::class])
+@Component(modules = [ApplicationModule::class, NetworkModule::class, ViewModelModule::class])
 interface ApplicationComponent {
     fun inject(application: CaseStudyApplication)
+    fun inject(activity: SingleActivity)
 }
