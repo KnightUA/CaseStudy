@@ -38,6 +38,8 @@
             android:layout_width="@dimen/match_constraint"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_l"
+            android:imeOptions="actionDone"
+            android:inputType="text"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/iv_device"

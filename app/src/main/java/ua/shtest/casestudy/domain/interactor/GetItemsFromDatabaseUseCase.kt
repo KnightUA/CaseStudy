@@ -1,8 +1,9 @@
 package ua.shtest.casestudy.domain.interactor
 
 import io.reactivex.rxjava3.core.Observable
+import ua.shtest.casestudy.data.local.dao.ItemDao
+import ua.shtest.casestudy.data.local.mapper.ItemEntityMapper
 import ua.shtest.casestudy.domain.model.Item
-import ua.shtest.casestudy.domain.repository.ItemsRxRepository
 import javax.inject.Inject
 
 /**
@@ -11,10 +12,11 @@ import javax.inject.Inject
  * @email stanislav.humeniuk@gmail.com
  */
 
-class GetItemsUseCase @Inject constructor(
-    private val repository: ItemsRxRepository,
+class GetItemsFromDatabaseUseCase @Inject constructor(
+    private val itemDao: ItemDao,
+    private val itemEntityMapper: ItemEntityMapper
 ) : UseCase<List<Item>>() {
     override fun execute(): Observable<List<Item>> {
-        return repository.items().toObservable()
+        return itemDao.getAll().map(itemEntityMapper::map).toObservable()
     }
 }

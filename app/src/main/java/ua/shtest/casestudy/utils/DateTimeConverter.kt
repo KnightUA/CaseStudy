@@ -15,4 +15,9 @@ object DateTimeConverter {
         val parser = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault())
         return parser.parse(this)
     }
+
+    fun Date.formatAsServerDate(): String {
+        val parser = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault())
+        return parser.format(this)
+    }
 }

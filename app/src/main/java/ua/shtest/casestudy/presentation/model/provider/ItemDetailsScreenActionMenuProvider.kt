@@ -14,13 +14,23 @@ import ua.shtest.casestudy.presentation.model.menu.item.details.ItemDetailsScree
  * @email stanislav.humeniuk@gmail.com
  */
 
-class ItemDetailsScreenActionMenuProvider(private val actionMenuHandler: ItemDetailsScreenActionMenuHandler) :
+class ItemDetailsScreenActionMenuProvider(
+    private val actionMenuHandler: ItemDetailsScreenActionMenuHandler,
+    private val editMode: Boolean
+) :
     MenuProvider {
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-        menuInflater.inflate(R.menu.item_details, menu)
+        if (editMode) {
+            menuInflater.inflate(R.menu.item_details, menu)
+        }
     }
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean = when (menuItem.itemId) {
+        android.R.id.home -> {
+            actionMenuHandler.onItemDetailsActionMenu(ItemDetailsScreenActionMenu.Back)
+            true
+        }
+
         R.id.menu_item_save -> {
             actionMenuHandler.onItemDetailsActionMenu(ItemDetailsScreenActionMenu.Save)
             true

@@ -5,6 +5,7 @@ import timber.log.Timber
 import ua.shtest.casestudy.BuildConfig
 import ua.shtest.casestudy.di.ApplicationComponent
 import ua.shtest.casestudy.di.DaggerApplicationComponent
+import ua.shtest.casestudy.di.database.RoomModule
 
 /**
  * @project Case Study
@@ -14,7 +15,10 @@ import ua.shtest.casestudy.di.DaggerApplicationComponent
 
 class CaseStudyApplication : Application() {
 
-    val appComponent: ApplicationComponent by lazy { DaggerApplicationComponent.create() }
+    val appComponent: ApplicationComponent by lazy {
+        DaggerApplicationComponent.builder()
+            .roomModule(RoomModule(applicationContext)).build()
+    }
 
     override fun onCreate() {
         super.onCreate()

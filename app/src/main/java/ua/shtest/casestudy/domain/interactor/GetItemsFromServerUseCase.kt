@@ -7,17 +7,14 @@ import javax.inject.Inject
 
 /**
  * @project Case Study
- * @author Stanislav Humeniuk on 03.09.2023
+ * @author Stanislav Humeniuk on 02.09.2023
  * @email stanislav.humeniuk@gmail.com
  */
 
-class UpdateItemUseCase @Inject constructor(
+class GetItemsFromServerUseCase @Inject constructor(
     private val repository: ItemsRxRepository,
-) : UseCaseWithParameters<UpdateItemUseCase.Params, List<Item>>() {
-
-    override fun execute(params: Params): Observable<List<Item>> {
+) : UseCase<List<Item>>() {
+    override fun execute(): Observable<List<Item>> {
         return repository.items().toObservable()
     }
-
-    class Params(protected val item: Item)
 }

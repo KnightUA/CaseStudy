@@ -74,7 +74,7 @@ class ItemListFragment : Fragment(R.layout.fragment_item_list) {
     }
 
     private fun initData() {
-        viewModel.fetchItemsFromServer()
+        viewModel.fetchItems()
     }
 
     private fun initMenuProvider() {

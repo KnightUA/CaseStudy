@@ -16,4 +16,6 @@
     <dimen name="image_size_s">24dp</dimen>
 
     <dimen name="divider">1dp</dimen>
+
+    <dimen name="rounded_image_radius">16dp</dimen>
 </resources>

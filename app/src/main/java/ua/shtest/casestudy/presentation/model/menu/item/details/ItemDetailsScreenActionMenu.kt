@@ -8,4 +8,5 @@ package ua.shtest.casestudy.presentation.model.menu.item.details
 
 sealed class ItemDetailsScreenActionMenu {
     object Save : ItemDetailsScreenActionMenu()
+    object Back : ItemDetailsScreenActionMenu()
 }

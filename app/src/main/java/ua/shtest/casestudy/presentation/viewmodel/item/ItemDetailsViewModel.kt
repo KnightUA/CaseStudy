@@ -5,12 +5,13 @@ import android.text.TextWatcher
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.navigation.NavArgs
-import ua.shtest.casestudy.domain.interactor.UpdateItemUseCase
+import timber.log.Timber
+import ua.shtest.casestudy.domain.interactor.UpdateItemInDatabaseUseCase
 import ua.shtest.casestudy.domain.model.Item
 import ua.shtest.casestudy.presentation.model.menu.item.details.ItemDetailsScreenActionMenu
 import ua.shtest.casestudy.presentation.model.menu.item.details.ItemDetailsScreenActionMenuHandler
 import ua.shtest.casestudy.presentation.view.ui.fragments.item.ItemDetailsFragmentArgs
+import ua.shtest.casestudy.utils.SingleEvent
 import javax.inject.Inject
 
 /**
@@ -19,14 +20,17 @@ import javax.inject.Inject
  * @email stanislav.humeniuk@gmail.com
  */
 
-class ItemDetailsViewModel @Inject constructor(private val updateItemUseCase: UpdateItemUseCase) :
+class ItemDetailsViewModel @Inject constructor(private val updateItemInDatabaseUseCase: UpdateItemInDatabaseUseCase) :
     ViewModel(), ItemDetailsScreenActionMenuHandler {
 
     private val _item = MutableLiveData<Item>()
     val item: LiveData<Item> = _item
 
-    private val _editMode = MutableLiveData<Boolean>(false)
+    private val _editMode = MutableLiveData(false)
     val editMode: LiveData<Boolean> = _editMode
+
+    private val _navigateUp = MutableLiveData<SingleEvent<Unit>>()
+    val navigateUp: LiveData<SingleEvent<Unit>> = _navigateUp
 
     private var deviceName: String = ""
 
@@ -47,6 +51,7 @@ class ItemDetailsViewModel @Inject constructor(private val updateItemUseCase: Up
     override fun onItemDetailsActionMenu(actionMenu: ItemDetailsScreenActionMenu) {
         when (actionMenu) {
             ItemDetailsScreenActionMenu.Save -> saveItemDetails()
+            ItemDetailsScreenActionMenu.Back -> _navigateUp.postValue(SingleEvent(Unit))
         }
     }
 
@@ -55,9 +60,16 @@ class ItemDetailsViewModel @Inject constructor(private val updateItemUseCase: Up
         _editMode.postValue(navArgs.editMode)
     }
 
-    private fun saveItemDetails() = item.value?.let {
-        updateItemUseCase.invoke(
-            UpdateItemUseCase.Params(item = it.copy(name = deviceName)),
-            {})
+    fun saveItemDetails() = item.value?.let {
+        val updatedItem = it.copy(name = deviceName)
+        updateItemInDatabaseUseCase.invoke(
+            UpdateItemInDatabaseUseCase.Params(item = updatedItem)
+        ) { either ->
+            either.fold(onFailure = Timber::e, onSuccess = {
+                _item.postValue(updatedItem)
+                _editMode.postValue(false)
+                _navigateUp.postValue(SingleEvent(Unit))
+            })
+        }
     }
 }

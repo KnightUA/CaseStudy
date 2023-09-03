@@ -36,10 +36,12 @@
         android:layout_margin="@dimen/spacing_l"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Oop...Something went wrong. Please check your internet connection!" />
+        tools:text="Oop...Something went wrong. Please check your internet connection!"
+        tools:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

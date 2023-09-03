@@ -2,11 +2,13 @@ package ua.shtest.casestudy.presentation.view.ui.fragments.item
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuHost
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coil.load
 import ua.shtest.casestudy.R
@@ -16,6 +18,9 @@ import ua.shtest.casestudy.presentation.model.provider.ItemDetailsScreenActionMe
 import ua.shtest.casestudy.presentation.model.provider.PlatformImageResourceProvider
 import ua.shtest.casestudy.presentation.viewmodel.item.ItemDetailsViewModel
 import ua.shtest.casestudy.utils.ApplicationExtensions.safeAppComponent
+import ua.shtest.casestudy.utils.EditTextExtensions.doOnActionDone
+import ua.shtest.casestudy.utils.EditTextExtensions.hideKeyboard
+import ua.shtest.casestudy.utils.EditTextExtensions.showKeyboard
 import ua.shtest.casestudy.utils.ViewBindingExtension.viewBinding
 import javax.inject.Inject
 
@@ -34,7 +39,12 @@ class ItemDetailsFragment : Fragment(R.layout.fragment_item_details) {
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private val viewModel by viewModels<ItemDetailsViewModel> { viewModelFactory }
-    private val menuProvider by lazy { return@lazy ItemDetailsScreenActionMenuProvider(viewModel) }
+    private val menuProvider by lazy {
+        return@lazy ItemDetailsScreenActionMenuProvider(
+            viewModel,
+            navArgs.editMode
+        )
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         safeAppComponent()?.inject(this)
@@ -51,30 +61,38 @@ class ItemDetailsFragment : Fragment(R.layout.fragment_item_details) {
     }
 
     private fun initViews() {
+        initBackPress()
         initMenuProvider()
     }
 
     private fun initObservers() {
         viewModel.item.observe(viewLifecycleOwner, ::bindItemWithUi)
         viewModel.editMode.observe(viewLifecycleOwner, ::updateViewsEditMode)
+        viewModel.navigateUp.observe(viewLifecycleOwner) { findNavController().navigateUp() }
     }
 
     private fun initData() {
         viewModel.fetchDataFromNavArgs(navArgs)
     }
 
-    private fun initMenuProvider() {
-        if (navArgs.editMode) {
-            (requireActivity() as MenuHost).addMenuProvider(menuProvider)
+    private fun initBackPress() {
+        (activity as? AppCompatActivity)?.supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
         }
+    }
+
+    private fun initMenuProvider() {
+        (requireActivity() as MenuHost).addMenuProvider(menuProvider)
     }
 
     private fun updateViewsEditMode(editMode: Boolean) = with(binding) {
         tvDeviceName.isVisible = !editMode
         etDeviceName.isVisible = editMode
 
+        etDeviceName.doOnActionDone(viewModel::saveItemDetails)
         etDeviceName.addTextChangedListener(viewModel.deviceNameTextWatcher).takeIf { editMode }
-        etDeviceName.requestFocus().takeIf { editMode }
+        etDeviceName.showKeyboard().takeIf { editMode }
     }
 
     private fun bindItemWithUi(item: Item) = with(binding) {
@@ -95,9 +113,20 @@ class ItemDetailsFragment : Fragment(R.layout.fragment_item_details) {
     }
 
     private fun clearReferences() {
-        (requireActivity() as MenuHost).removeMenuProvider(menuProvider)
+        removeMenuProvider()
+        removeBackButtonFromActionBar()
 
-        binding.etDeviceName.clearFocus()
+        binding.etDeviceName.hideKeyboard()
         binding.etDeviceName.removeTextChangedListener(viewModel.deviceNameTextWatcher)
+    }
+
+    private fun removeBackButtonFromActionBar() =
+        (activity as? AppCompatActivity)?.supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(false)
+            setDisplayShowHomeEnabled(false)
+        }
+
+    private fun removeMenuProvider() {
+        (requireActivity() as MenuHost).removeMenuProvider(menuProvider)
     }
 }
