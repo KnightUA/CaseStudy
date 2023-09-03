@@ -21,12 +21,16 @@ import javax.inject.Singleton
 @Singleton
 class ItemsApiMapper @Inject constructor() {
 
-    fun map(itemApiModel: ItemApiModel): Item {
+    fun map(
+        itemApiModel: ItemApiModel,
+        name: String = generateName(itemApiModel.pkDevice.toInt())
+    ): Item {
         return Item(
             accountId = AccountId(itemApiModel.pkAccount),
             serialNumber = SerialNumber(itemApiModel.pkDevice),
             deviceType = DeviceType(itemApiModel.pkDeviceType),
             deviceSubType = DeviceSubType(itemApiModel.pkDeviceSubType),
+            name = name,
             macAddress = itemApiModel.macAddress,
             internalIp = itemApiModel.internalIp,
             firmware = itemApiModel.firmware,
@@ -40,5 +44,12 @@ class ItemsApiMapper @Inject constructor() {
         )
     }
 
-    fun map(itemsApiModels: List<ItemApiModel>): List<Item> = itemsApiModels.map(this::map)
+    fun map(itemsApiModels: List<ItemApiModel>): List<Item> =
+        itemsApiModels.mapIndexed { index, apiModel ->
+            return@mapIndexed map(apiModel, generateName(index))
+        }
+
+    private fun generateName(index: Int): String {
+        return "Home Number $index"
+    }
 }

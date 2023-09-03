@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
-import ua.shtest.casestudy.ui.ItemsViewModel
+import ua.shtest.casestudy.ui.viewmodel.item.ItemsViewModel
 
 /**
  * @project Case Study

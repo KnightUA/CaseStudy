@@ -9,8 +9,9 @@
     <dimen name="spacing_s">4dp</dimen>
     <dimen name="spacing_xs">2dp</dimen>
 
-    <dimen name="image_size_xl">128dp</dimen>
-    <dimen name="image_size_l">64dp</dimen>
-    <dimen name="image_size_m">48dp</dimen>
+    <dimen name="image_size_xxl">128dp</dimen>
+    <dimen name="image_size_xl">64dp</dimen>
+    <dimen name="image_size_l">48dp</dimen>
+    <dimen name="image_size_m">36dp</dimen>
     <dimen name="image_size_s">24dp</dimen>
 </resources>

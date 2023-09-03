@@ -13,6 +13,7 @@ data class Item(
     val serialNumber: SerialNumber,
     val deviceType: DeviceType,
     val deviceSubType: DeviceSubType,
+    val name: String,
     val macAddress: String,
     val internalIp: String,
     val firmware: String,

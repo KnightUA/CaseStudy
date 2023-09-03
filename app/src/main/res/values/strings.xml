@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Case Study</string>
+    <string name="label_author">Stanislav Humeniuk</string>
 </resources>

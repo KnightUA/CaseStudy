@@ -4,7 +4,7 @@ import dagger.Component
 import ua.shtest.casestudy.application.CaseStudyApplication
 import ua.shtest.casestudy.di.network.NetworkModule
 import ua.shtest.casestudy.di.viewmodel.ViewModelModule
-import ua.shtest.casestudy.ui.SingleActivity
+import ua.shtest.casestudy.ui.activity.SingleActivity
 import javax.inject.Singleton
 
 /**

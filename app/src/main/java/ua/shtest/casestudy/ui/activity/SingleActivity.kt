@@ -1,4 +1,4 @@
-package ua.shtest.casestudy.ui
+package ua.shtest.casestudy.ui.activity
 
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import ua.shtest.casestudy.R
 import ua.shtest.casestudy.application.CaseStudyApplication
+import ua.shtest.casestudy.ui.viewmodel.item.ItemsViewModel
 import javax.inject.Inject
 
 /**
