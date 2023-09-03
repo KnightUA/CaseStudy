@@ -2,6 +2,7 @@ package ua.shtest.casestudy.presentation.view.ui.fragments.item
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.MenuHost
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -11,7 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import ua.shtest.casestudy.R
 import ua.shtest.casestudy.databinding.FragmentItemListBinding
 import ua.shtest.casestudy.domain.model.Item
-import ua.shtest.casestudy.presentation.model.states.item.ItemListScreenState
+import ua.shtest.casestudy.presentation.model.item.states.ItemListScreenState
+import ua.shtest.casestudy.presentation.model.provider.ItemListActionMenuProvider
 import ua.shtest.casestudy.presentation.view.adapter.item.ItemsListAdapter
 import ua.shtest.casestudy.presentation.viewmodel.item.ItemsViewModel
 import ua.shtest.casestudy.utils.ApplicationExtensions.safeAppComponent
@@ -29,7 +31,7 @@ class ItemListFragment : Fragment(R.layout.fragment_item_list) {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    val viewModel: ItemsViewModel by viewModels { viewModelFactory }
+    private val viewModel: ItemsViewModel by viewModels { viewModelFactory }
 
     private val binding by viewBinding(FragmentItemListBinding::bind)
     private val itemsListAdapter by lazy {
@@ -37,20 +39,30 @@ class ItemListFragment : Fragment(R.layout.fragment_item_list) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         safeAppComponent()?.inject(this)
+        super.onViewCreated(view, savedInstanceState)
 
         initViews()
         initObservers()
-        viewModel.fetchItemsFromServer()
+        initData()
     }
 
     private fun initViews() {
+        initMenu()
         initRecyclerAdapter()
     }
 
     private fun initObservers() {
         viewModel.screenState.observe(viewLifecycleOwner, ::handleScreenState)
+    }
+
+    private fun initData() {
+        viewModel.fetchItemsFromServer()
+    }
+
+    private fun initMenu() {
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(ItemListActionMenuProvider(viewModel))
     }
 
     private fun initRecyclerAdapter() = with(binding.rvItems) {

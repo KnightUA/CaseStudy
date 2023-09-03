@@ -18,9 +18,7 @@ class ItemDetailsFragment : Fragment(R.layout.fragment_item_details) {
         super.onViewCreated(view, savedInstanceState)
 
         val controller = Navigation.findNavController(view)
-        view.findViewById<View>(R.id.tv_test).setOnClickListener {
-            controller.popBackStack()
-        }
+
     }
 
 }

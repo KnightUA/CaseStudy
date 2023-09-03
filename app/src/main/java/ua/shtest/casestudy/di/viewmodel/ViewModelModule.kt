@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
+import ua.shtest.casestudy.presentation.viewmodel.item.ItemHostViewModel
 import ua.shtest.casestudy.presentation.viewmodel.item.ItemsViewModel
 
 /**
@@ -22,4 +23,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ItemsViewModel::class)
     internal abstract fun bindItemsViewModel(viewModel: ItemsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ItemHostViewModel::class)
+    internal abstract fun bindItemHostViewModel(viewModel: ItemHostViewModel): ViewModel
 }

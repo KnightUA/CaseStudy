@@ -1,4 +1,4 @@
-package ua.shtest.casestudy.presentation.model.states.item
+package ua.shtest.casestudy.presentation.model.item.states
 
 import ua.shtest.casestudy.domain.model.Item
 

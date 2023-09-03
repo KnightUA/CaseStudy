@@ -5,7 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ua.shtest.casestudy.domain.interactor.GetItemsUseCase
 import ua.shtest.casestudy.domain.model.Item
-import ua.shtest.casestudy.presentation.model.states.item.ItemListScreenState
+import ua.shtest.casestudy.presentation.model.item.action.ItemListAction
+import ua.shtest.casestudy.presentation.model.item.states.ItemListScreenState
+import ua.shtest.casestudy.presentation.model.menu.ItemListActionMenu
+import ua.shtest.casestudy.presentation.model.menu.ItemListActionMenuHandler
 import ua.shtest.casestudy.utils.SingleEvent
 import javax.inject.Inject
 
@@ -16,7 +19,7 @@ import javax.inject.Inject
  */
 
 class ItemsViewModel @Inject constructor(private val getItemsUseCase: GetItemsUseCase) :
-    ViewModel() {
+    ViewModel(), ItemListActionMenuHandler {
 
     private val _screenState = MutableLiveData<ItemListScreenState>(ItemListScreenState.Loading)
     val screenState: LiveData<ItemListScreenState> = _screenState
@@ -24,7 +27,12 @@ class ItemsViewModel @Inject constructor(private val getItemsUseCase: GetItemsUs
     private val _listAction = MutableLiveData<SingleEvent<ItemListAction>>()
     val listAction: LiveData<SingleEvent<ItemListAction>> = _listAction
 
+    override fun onItemListActionMenu(actionMenu: ItemListActionMenu) = when (actionMenu) {
+        ItemListActionMenu.Refresh -> fetchItemsFromServer()
+    }
+
     fun fetchItemsFromServer() {
+        _screenState.postValue(ItemListScreenState.Loading)
         getItemsUseCase.invoke { either ->
             either.fold(::handleFailureWhileFetchingItems, ::handleSuccessfullyFetchedItems)
         }
@@ -54,13 +62,15 @@ class ItemsViewModel @Inject constructor(private val getItemsUseCase: GetItemsUs
         _listAction.postValue(SingleEvent(ItemListAction.OpenItemDetails(item, editMode)))
     }
 
+    fun handleMenuActionEvent(menuActionEvent: SingleEvent<ItemListActionMenu>) =
+        menuActionEvent.getContentIfNotHandled()?.let { menuAction ->
+            when (menuAction) {
+                ItemListActionMenu.Refresh -> fetchItemsFromServer()
+            }
+        }
+
     override fun onCleared() {
         getItemsUseCase.dispose()
         super.onCleared()
     }
-}
-
-sealed class ItemListAction {
-    data class ShowRemoveItemConfirmationDialog(val item: Item) : ItemListAction()
-    data class OpenItemDetails(val item: Item, val editMode: Boolean = false) : ItemListAction()
 }

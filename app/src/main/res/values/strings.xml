@@ -6,4 +6,5 @@
     <string name="format_serial_number">SN: %d</string>
 
     <string name="general_error_message">Oops…Something went wrong. Please check your internet connection!</string>
+    <string name="menu_item_refresh">Refresh</string>
 </resources>
