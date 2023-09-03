@@ -2,6 +2,7 @@ package ua.shtest.casestudy.presentation.view.ui.fragments.item
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -68,16 +69,26 @@ class ItemListFragment : Fragment(R.layout.fragment_item_list) {
     }
 
     private fun showLoading() = with(binding) {
-
+        rvItems.isVisible = false
+        tvErrorMessage.isVisible = false
+        progressBar.isVisible = true
     }
 
     private fun showItems(items: List<Item>) = with(binding) {
+        tvErrorMessage.isVisible = false
+        progressBar.isVisible = false
+        rvItems.isVisible = true
+
         itemsListAdapter.submitList(items)
     }
 
     private fun updateItems(items: List<Item>) = itemsListAdapter.submitList(items)
 
     private fun showError(message: CharSequence? = null) = with(binding) {
+        progressBar.isVisible = false
+        rvItems.isVisible = false
+        tvErrorMessage.isVisible = true
 
+        tvErrorMessage.text = message ?: getString(R.string.general_error_message)
     }
 }

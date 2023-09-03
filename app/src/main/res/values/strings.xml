@@ -2,5 +2,8 @@
     <string name="app_name">Case Study</string>
 
     <string name="label_author">Stanislav Humeniuk</string>
+
     <string name="format_serial_number">SN: %d</string>
+
+    <string name="general_error_message">Oops…Something went wrong. Please check your internet connection!</string>
 </resources>

@@ -9,7 +9,7 @@ import ua.shtest.casestudy.R
  * @email stanislav.humeniuk@gmail.com
  */
 
-class ItemHostFragment : Fragment(R.layout.fraagment_items_host) {
+class ItemHostFragment : Fragment(R.layout.fragment_items_host) {
 
 
 }

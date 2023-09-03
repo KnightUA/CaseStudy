@@ -9,5 +9,5 @@
         android:id="@+id/itemsHostFragment"
         android:name="ua.shtest.casestudy.presentation.view.ui.fragments.item.ItemHostFragment"
         android:label="Items Host"
-        tools:layout="@layout/fraagment_items_host" />
+        tools:layout="@layout/fragment_items_host" />
 </navigation>
