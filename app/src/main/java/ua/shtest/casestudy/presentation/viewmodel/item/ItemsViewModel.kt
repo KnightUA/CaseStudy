@@ -7,8 +7,8 @@ import ua.shtest.casestudy.domain.interactor.GetItemsUseCase
 import ua.shtest.casestudy.domain.model.Item
 import ua.shtest.casestudy.presentation.model.item.action.ItemListAction
 import ua.shtest.casestudy.presentation.model.item.states.ItemListScreenState
-import ua.shtest.casestudy.presentation.model.menu.ItemListScreenActionMenu
-import ua.shtest.casestudy.presentation.model.menu.ItemListScreenActionMenuHandler
+import ua.shtest.casestudy.presentation.model.menu.item.list.ItemListScreenActionMenu
+import ua.shtest.casestudy.presentation.model.menu.item.list.ItemListScreenActionMenuHandler
 import ua.shtest.casestudy.utils.SingleEvent
 import javax.inject.Inject
 

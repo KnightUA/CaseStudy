@@ -1,4 +1,4 @@
-package ua.shtest.casestudy.presentation.model.menu
+package ua.shtest.casestudy.presentation.model.menu.item.list
 
 /**
  * @project Case Study

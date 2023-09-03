@@ -12,20 +12,18 @@ import ua.shtest.casestudy.domain.functional.Either
  * @email stanislav.humeniuk@gmail.com
  */
 
-abstract class UseCase<T> where T : Any {
+abstract class UseCaseWithParameters<in P, T> where P : Any, T : Any {
 
-    protected val disposables = CompositeDisposable()
+    private val disposables = CompositeDisposable()
 
-    abstract fun execute(): Observable<T>
+    abstract fun execute(params: P): Observable<T>
 
-    operator fun invoke(onResult: (Either<Throwable, T>) -> Unit = {}) {
-        val observable = execute().subscribeOn(Schedulers.io()).observeOn(Schedulers.io())
+    operator fun invoke(params: P, onResult: (Either<Throwable, T>) -> Unit = {}) {
+        val observable = execute(params).subscribeOn(Schedulers.io()).observeOn(Schedulers.io())
         disposables.add(observable.subscribeWith(createDisposableObserverWith(onResult)))
     }
 
-    fun dispose() = disposables.dispose().takeIf { !disposables.isDisposed }
-
-    protected fun createDisposableObserverWith(onResult: (Either<Throwable, T>) -> Unit): DisposableObserver<T> =
+    private fun createDisposableObserverWith(onResult: (Either<Throwable, T>) -> Unit): DisposableObserver<T> =
         object : DisposableObserver<T>() {
             override fun onNext(result: T) {
                 onResult(Either.Success(result))

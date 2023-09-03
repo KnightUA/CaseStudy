@@ -35,6 +35,7 @@ class ItemsApiMapper @Inject constructor() {
             internalIp = itemApiModel.internalIp,
             firmware = itemApiModel.firmware,
             platform = Platform.createFrom(itemApiModel.platform),
+            model = itemApiModel.platform,
             lastAliveReported = itemApiModel.lastAliveReported.convertServerDateToLocal(),
             serverInfo = ItemServerInfo(
                 device = itemApiModel.serverDevice,

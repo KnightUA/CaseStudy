@@ -4,9 +4,15 @@
     <string name="label_author">Stanislav Humeniuk</string>
 
     <string name="format_serial_number">SN: %d</string>
+    <string name="format_mac_address">MAC Address: %s</string>
+    <string name="format_firmware">Firmware: %s</string>
+    <string name="format_model">Model: %s</string>
 
     <string name="general_error_message">Oops…Something went wrong. Please check your internet connection!</string>
+
     <string name="menu_item_refresh">Refresh</string>
+    <string name="menu_item_save">Save</string>
+
     <string name="dialog_remove_item_title">Remove item</string>
     <string name="dialog_remove_item_message">Are you sure that you want to remove item \"%1$s\" from list?</string>
     <string name="dialog_remove_item_positive_button">Remove</string>

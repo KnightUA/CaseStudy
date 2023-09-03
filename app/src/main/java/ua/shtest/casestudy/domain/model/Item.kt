@@ -19,6 +19,7 @@ data class Item(
     val internalIp: String,
     val firmware: String,
     val platform: Platform,
+    val model: String,
     val lastAliveReported: Date?,
     val serverInfo: ItemServerInfo
 ) : Serializable

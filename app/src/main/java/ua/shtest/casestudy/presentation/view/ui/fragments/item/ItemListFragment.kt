@@ -38,6 +38,7 @@ class ItemListFragment : Fragment(R.layout.fragment_item_list) {
     private val viewModel: ItemsViewModel by viewModels { viewModelFactory }
 
     private val binding by viewBinding(FragmentItemListBinding::bind)
+    private val menuProvider by lazy { return@lazy ItemListScreenActionMenuProvider(viewModel) }
     private val itemListAdapter by lazy {
         return@lazy ItemListAdapter().apply {
             onItemClickListener = { viewModel.openItemDetails(it) }
@@ -45,7 +46,6 @@ class ItemListFragment : Fragment(R.layout.fragment_item_list) {
             onItemEditClickListener = { viewModel.openItemDetails(it, editMode = true) }
         }
     }
-    private val menuProvider by lazy { return@lazy ItemListScreenActionMenuProvider(viewModel) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         safeAppComponent()?.inject(this)

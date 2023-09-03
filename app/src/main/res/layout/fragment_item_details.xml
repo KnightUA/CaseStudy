@@ -1,61 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:fillViewport="true">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_device"
-        android:layout_width="@dimen/image_size_l"
-        android:layout_height="@dimen/match_constraint"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="w, 1:1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.helper.widget.Flow
-        android:layout_width="@dimen/match_constraint"
-        android:layout_height="@dimen/match_constraint"
-        android:layout_marginHorizontal="@dimen/spacing_l"
-        app:constraint_referenced_ids="tv_device_name,tv_device_serial_number"
-        app:flow_maxElementsWrap="@integer/single"
-        app:flow_verticalStyle="spread"
-        app:flow_wrapMode="aligned"
-        app:layout_constraintBottom_toBottomOf="@id/iv_device"
-        app:layout_constraintEnd_toStartOf="@id/iv_edit"
-        app:layout_constraintStart_toEndOf="@id/iv_device"
-        app:layout_constraintTop_toTopOf="@id/iv_device" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_device"
+            android:layout_width="@dimen/image_size_xl"
+            android:layout_height="@dimen/match_constraint"
+            android:layout_marginTop="@dimen/spacing_l"
+            app:layout_constraintDimensionRatio="w, 1:1"
+            app:layout_constraintStart_toStartOf="@id/spacing_begin"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_device_name"
-        android:layout_width="@dimen/match_constraint"
-        android:layout_height="wrap_content"
-        android:ellipsize="marquee"
-        android:maxLines="@integer/single"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-        tools:text="Home Number 1" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_device_name"
+            android:layout_width="@dimen/match_constraint"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_l"
+            android:ellipsize="marquee"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            app:layout_constraintBottom_toBottomOf="@id/iv_device"
+            app:layout_constraintEnd_toEndOf="@id/spacing_end"
+            app:layout_constraintStart_toEndOf="@id/iv_device"
+            app:layout_constraintTop_toTopOf="@id/iv_device"
+            tools:text="Home Number 1" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_device_serial_number"
-        android:layout_width="@dimen/match_constraint"
-        android:layout_height="wrap_content"
-        android:ellipsize="marquee"
-        android:maxLines="@integer/single"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-        tools:text="SN: 4664567623" />
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_device_name"
+            android:layout_width="@dimen/match_constraint"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_l"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/iv_device"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_device"
+            app:layout_constraintTop_toTopOf="@id/iv_device"
+            tools:text="Home Number 1" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_edit"
-        android:layout_width="@dimen/image_size_m"
-        android:layout_height="@dimen/match_constraint"
-        android:background="?selectableItemBackgroundBorderless"
-        android:padding="@dimen/spacing_s"
-        android:src="@drawable/ic_edit_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="w, 1:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier_bottom_info"
+            android:layout_width="@dimen/match_constraint"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="iv_device,tv_device_name" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_device_serial_number"
+            android:layout_width="@dimen/match_constraint"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xl"
+            android:ellipsize="marquee"
+            android:maxLines="@integer/single"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            app:layout_constraintEnd_toEndOf="@id/spacing_end"
+            app:layout_constraintStart_toStartOf="@id/spacing_begin"
+            app:layout_constraintTop_toBottomOf="@id/barrier_bottom_info"
+            tools:text="SN: 4664567623" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_device_mac_address"
+            android:layout_width="@dimen/match_constraint"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:maxLines="@integer/single"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            app:layout_constraintEnd_toEndOf="@id/tv_device_serial_number"
+            app:layout_constraintStart_toStartOf="@id/tv_device_serial_number"
+            app:layout_constraintTop_toBottomOf="@id/tv_device_serial_number"
+            tools:text="MAC Address: E4:24:A5:23:W2:Q2" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_device_firmware"
+            android:layout_width="@dimen/match_constraint"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xl"
+            android:ellipsize="marquee"
+            android:maxLines="@integer/single"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            app:layout_constraintEnd_toEndOf="@id/spacing_end"
+            app:layout_constraintStart_toStartOf="@id/spacing_begin"
+            app:layout_constraintTop_toBottomOf="@id/tv_device_mac_address"
+            tools:text="Firmware: 1.7.234" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_device_model"
+            android:layout_width="@dimen/match_constraint"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_l"
+            android:ellipsize="marquee"
+            android:maxLines="@integer/single"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/tv_device_firmware"
+            app:layout_constraintStart_toStartOf="@id/tv_device_firmware"
+            app:layout_constraintTop_toBottomOf="@id/tv_device_firmware"
+            app:layout_constraintVertical_bias="0"
+            tools:text="Model: Vera Edge" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/spacing_begin"
+            android:layout_width="@dimen/match_constraint"
+            android:layout_height="@dimen/match_constraint"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/spacing_l" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/spacing_end"
+            android:layout_width="@dimen/match_constraint"
+            android:layout_height="@dimen/match_constraint"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/spacing_l" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
