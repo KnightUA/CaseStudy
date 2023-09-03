@@ -1,4 +1,4 @@
-package ua.shtest.casestudy.ui.fragments.item
+package ua.shtest.casestudy.presentation.view.ui.fragments.item
 
 import androidx.fragment.app.Fragment
 import ua.shtest.casestudy.R
@@ -9,7 +9,7 @@ import ua.shtest.casestudy.R
  * @email stanislav.humeniuk@gmail.com
  */
 
-class ItemsHostFragment : Fragment(R.layout.fraagment_items_host) {
+class ItemHostFragment : Fragment(R.layout.fraagment_items_host) {
 
 
 }

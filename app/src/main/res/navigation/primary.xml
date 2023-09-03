@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/itemsHostFragment"
-        android:name="ua.shtest.casestudy.ui.fragments.item.ItemsHostFragment"
+        android:name="ua.shtest.casestudy.presentation.view.ui.fragments.item.ItemHostFragment"
         android:label="Items Host"
         tools:layout="@layout/fraagment_items_host" />
 </navigation>

@@ -1,4 +1,4 @@
-package ua.shtest.casestudy.ui.model.states.item
+package ua.shtest.casestudy.presentation.model.states.item
 
 import ua.shtest.casestudy.domain.model.Item
 
@@ -11,6 +11,6 @@ import ua.shtest.casestudy.domain.model.Item
 sealed class ItemListScreenState {
     object Loading : ItemListScreenState()
     data class Failed(val errorMessage: String? = null) : ItemListScreenState()
-
     data class Items(val values: List<Item>) : ItemListScreenState()
+    data class UpdatedItems(val values: List<Item>) : ItemListScreenState()
 }

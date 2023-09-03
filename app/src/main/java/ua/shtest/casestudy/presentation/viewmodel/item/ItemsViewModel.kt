@@ -1,11 +1,11 @@
-package ua.shtest.casestudy.ui.viewmodel.item
+package ua.shtest.casestudy.presentation.viewmodel.item
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ua.shtest.casestudy.domain.interactor.GetItemsUseCase
 import ua.shtest.casestudy.domain.model.Item
-import ua.shtest.casestudy.ui.model.states.item.ItemListScreenState
+import ua.shtest.casestudy.presentation.model.states.item.ItemListScreenState
 import ua.shtest.casestudy.utils.SingleEvent
 import javax.inject.Inject
 

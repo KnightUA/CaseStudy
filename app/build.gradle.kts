@@ -58,6 +58,7 @@ dependencies {
     val room_version = "2.5.2"
     val lifecycle_version = "2.6.1"
     val timber_version = "5.0.1"
+    val coil_version = "2.4.0"
 
     // Basic
     implementation("androidx.core:core-ktx:1.10.1")
@@ -100,6 +101,9 @@ dependencies {
 
     // Logging
     implementation("com.jakewharton.timber:timber:$timber_version")
+
+    // Image Loader
+    implementation("io.coil-kt:coil:$coil_version")
 
     // Testing
     testImplementation("junit:junit:4.13.2")

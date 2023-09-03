@@ -1,4 +1,4 @@
-package ua.shtest.casestudy.ui.fragments.item
+package ua.shtest.casestudy.presentation.view.ui.fragments.item
 
 import android.os.Bundle
 import android.view.View
