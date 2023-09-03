@@ -7,4 +7,8 @@
 
     <string name="general_error_message">Oops…Something went wrong. Please check your internet connection!</string>
     <string name="menu_item_refresh">Refresh</string>
+    <string name="dialog_remove_item_title">Remove item</string>
+    <string name="dialog_remove_item_message">Are you sure that you want to remove item \"%1$s\" from list?</string>
+    <string name="dialog_remove_item_positive_button">Remove</string>
+    <string name="dialog_remove_item_negative_button">Cancel</string>
 </resources>

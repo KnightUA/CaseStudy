@@ -3,7 +3,7 @@ package ua.shtest.casestudy.presentation.viewmodel.item
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ua.shtest.casestudy.presentation.model.menu.ItemListActionMenu
+import ua.shtest.casestudy.presentation.model.menu.ItemListScreenActionMenu
 import ua.shtest.casestudy.utils.SingleEvent
 import javax.inject.Inject
 
@@ -15,10 +15,10 @@ import javax.inject.Inject
 
 class ItemHostViewModel @Inject constructor() : ViewModel() {
 
-    private val _menuAction = MutableLiveData<SingleEvent<ItemListActionMenu>>()
-    val menuActionEvent: LiveData<SingleEvent<ItemListActionMenu>> = _menuAction
+    private val _menuAction = MutableLiveData<SingleEvent<ItemListScreenActionMenu>>()
+    val menuActionEvent: LiveData<SingleEvent<ItemListScreenActionMenu>> = _menuAction
 
     fun refreshMenuItemClicked() {
-        _menuAction.postValue(SingleEvent(ItemListActionMenu.Refresh))
+        _menuAction.postValue(SingleEvent(ItemListScreenActionMenu.Refresh))
     }
 }

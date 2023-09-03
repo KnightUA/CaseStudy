@@ -13,11 +13,29 @@ import ua.shtest.casestudy.presentation.model.provider.PlatformImageResourceProv
  * @email stanislav.humeniuk@gmail.com
  */
 
-class ItemViewHolder(private val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+typealias OnItemClickListener = (item: Item) -> Unit
+typealias OnItemLongClickListener = (item: Item) -> Unit
+typealias OnItemEditClickListener = (item: Item) -> Unit
+
+class ItemViewHolder(
+    private val binding: ListItemBinding,
+    private val onItemClickListener: OnItemClickListener? = null,
+    private val onItemLongClickListener: OnItemLongClickListener? = null,
+    private val onItemEditClickListener: OnItemEditClickListener? = null,
+) : RecyclerView.ViewHolder(binding.root) {
+
     fun bindWith(item: Item) = with(binding) {
         ivDevice.load(PlatformImageResourceProvider.provideBy(platform = item.platform))
         tvDeviceName.text = item.name
         tvDeviceSerialNumber.text =
             root.resources.getString(R.string.format_serial_number, item.serialNumber.value)
+
+        root.setOnClickListener { onItemClickListener?.invoke(item) }
+        root.setOnLongClickListener {
+            onItemLongClickListener?.invoke(item)
+            return@setOnLongClickListener true
+        }
+
+        ivEdit.setOnClickListener { onItemEditClickListener?.invoke(item) }
     }
 }

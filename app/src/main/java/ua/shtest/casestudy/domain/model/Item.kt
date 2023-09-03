@@ -1,5 +1,6 @@
 package ua.shtest.casestudy.domain.model
 
+import java.io.Serializable
 import java.util.Date
 
 /**
@@ -20,4 +21,4 @@ data class Item(
     val platform: Platform,
     val lastAliveReported: Date?,
     val serverInfo: ItemServerInfo
-)
+) : Serializable

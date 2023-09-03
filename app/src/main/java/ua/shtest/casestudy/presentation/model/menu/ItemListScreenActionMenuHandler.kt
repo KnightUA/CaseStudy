@@ -6,6 +6,6 @@ package ua.shtest.casestudy.presentation.model.menu
  * @email stanislav.humeniuk@gmail.com
  */
 
-sealed class ItemListActionMenu {
-    object Refresh : ItemListActionMenu()
+fun interface ItemListScreenActionMenuHandler {
+    fun onItemListActionMenu(actionMenu: ItemListScreenActionMenu)
 }

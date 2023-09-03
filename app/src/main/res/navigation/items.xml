@@ -19,5 +19,14 @@
         android:id="@+id/itemDetailsFragment"
         android:name="ua.shtest.casestudy.presentation.view.ui.fragments.item.ItemDetailsFragment"
         android:label="Item Details"
-        tools:layout="@layout/fragment_item_details" />
+        tools:layout="@layout/fragment_item_details">
+
+        <argument
+            android:name="item"
+            app:argType="ua.shtest.casestudy.domain.model.Item" />
+
+        <argument
+            android:name="editMode"
+            app:argType="boolean" />
+    </fragment>
 </navigation>

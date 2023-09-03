@@ -5,8 +5,8 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.core.view.MenuProvider
 import ua.shtest.casestudy.R
-import ua.shtest.casestudy.presentation.model.menu.ItemListActionMenu
-import ua.shtest.casestudy.presentation.model.menu.ItemListActionMenuHandler
+import ua.shtest.casestudy.presentation.model.menu.ItemListScreenActionMenu
+import ua.shtest.casestudy.presentation.model.menu.ItemListScreenActionMenuHandler
 
 /**
  * @project Case Study
@@ -14,7 +14,7 @@ import ua.shtest.casestudy.presentation.model.menu.ItemListActionMenuHandler
  * @email stanislav.humeniuk@gmail.com
  */
 
-class ItemListActionMenuProvider(private val actionMenuHandler: ItemListActionMenuHandler) :
+class ItemListScreenActionMenuProvider(private val actionMenuHandler: ItemListScreenActionMenuHandler) :
     MenuProvider {
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
         menuInflater.inflate(R.menu.item_list, menu)
@@ -22,7 +22,7 @@ class ItemListActionMenuProvider(private val actionMenuHandler: ItemListActionMe
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean = when (menuItem.itemId) {
         R.id.menu_item_refresh -> {
-            actionMenuHandler.onItemListActionMenu(ItemListActionMenu.Refresh)
+            actionMenuHandler.onItemListActionMenu(ItemListScreenActionMenu.Refresh)
             true
         }
 

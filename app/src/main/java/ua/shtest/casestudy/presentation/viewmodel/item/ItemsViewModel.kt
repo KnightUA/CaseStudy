@@ -7,8 +7,8 @@ import ua.shtest.casestudy.domain.interactor.GetItemsUseCase
 import ua.shtest.casestudy.domain.model.Item
 import ua.shtest.casestudy.presentation.model.item.action.ItemListAction
 import ua.shtest.casestudy.presentation.model.item.states.ItemListScreenState
-import ua.shtest.casestudy.presentation.model.menu.ItemListActionMenu
-import ua.shtest.casestudy.presentation.model.menu.ItemListActionMenuHandler
+import ua.shtest.casestudy.presentation.model.menu.ItemListScreenActionMenu
+import ua.shtest.casestudy.presentation.model.menu.ItemListScreenActionMenuHandler
 import ua.shtest.casestudy.utils.SingleEvent
 import javax.inject.Inject
 
@@ -19,16 +19,16 @@ import javax.inject.Inject
  */
 
 class ItemsViewModel @Inject constructor(private val getItemsUseCase: GetItemsUseCase) :
-    ViewModel(), ItemListActionMenuHandler {
+    ViewModel(), ItemListScreenActionMenuHandler {
 
     private val _screenState = MutableLiveData<ItemListScreenState>(ItemListScreenState.Loading)
     val screenState: LiveData<ItemListScreenState> = _screenState
 
     private val _listAction = MutableLiveData<SingleEvent<ItemListAction>>()
-    val listAction: LiveData<SingleEvent<ItemListAction>> = _listAction
+    val listItemAction: LiveData<SingleEvent<ItemListAction>> = _listAction
 
-    override fun onItemListActionMenu(actionMenu: ItemListActionMenu) = when (actionMenu) {
-        ItemListActionMenu.Refresh -> fetchItemsFromServer()
+    override fun onItemListActionMenu(actionMenu: ItemListScreenActionMenu) = when (actionMenu) {
+        ItemListScreenActionMenu.Refresh -> fetchItemsFromServer()
     }
 
     fun fetchItemsFromServer() {
@@ -62,10 +62,10 @@ class ItemsViewModel @Inject constructor(private val getItemsUseCase: GetItemsUs
         _listAction.postValue(SingleEvent(ItemListAction.OpenItemDetails(item, editMode)))
     }
 
-    fun handleMenuActionEvent(menuActionEvent: SingleEvent<ItemListActionMenu>) =
+    fun handleMenuActionEvent(menuActionEvent: SingleEvent<ItemListScreenActionMenu>) =
         menuActionEvent.getContentIfNotHandled()?.let { menuAction ->
             when (menuAction) {
-                ItemListActionMenu.Refresh -> fetchItemsFromServer()
+                ItemListScreenActionMenu.Refresh -> fetchItemsFromServer()
             }
         }
 
