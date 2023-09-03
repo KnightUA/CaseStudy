@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="match_constraint">0dp</dimen>
+
+    <dimen name="spacing_xxl">64dp</dimen>
+    <dimen name="spacing_xl">32dp</dimen>
+    <dimen name="spacing_l">16dp</dimen>
+    <dimen name="spacing_m">8dp</dimen>
+    <dimen name="spacing_s">4dp</dimen>
+    <dimen name="spacing_xs">2dp</dimen>
+
+    <dimen name="image_size_xxl">128dp</dimen>
+    <dimen name="image_size_xl">64dp</dimen>
+    <dimen name="image_size_l">48dp</dimen>
+    <dimen name="image_size_m">36dp</dimen>
+    <dimen name="image_size_s">24dp</dimen>
+
+    <dimen name="divider">1dp</dimen>
+
+    <dimen name="rounded_image_radius">16dp</dimen>
+</resources>

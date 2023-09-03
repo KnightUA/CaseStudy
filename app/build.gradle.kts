@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.kapt")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -19,6 +20,10 @@ android {
     }
 
     buildTypes {
+        all {
+            buildConfigField("String", "BASE_URL", "\"https://veramobile.mios.com/\"")
+        }
+
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -30,6 +35,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 
     compileOptions {
@@ -53,6 +59,7 @@ dependencies {
     val room_version = "2.5.2"
     val lifecycle_version = "2.6.1"
     val timber_version = "5.0.1"
+    val coil_version = "2.4.0"
 
     // Basic
     implementation("androidx.core:core-ktx:1.10.1")
@@ -87,6 +94,7 @@ dependencies {
     // Room
     implementation("androidx.room:room-ktx:$room_version")
     implementation("androidx.room:room-runtime:$room_version")
+    implementation("androidx.room:room-rxjava3:$room_version")
     kapt("androidx.room:room-compiler:$room_version")
 
     //Lifecycle
@@ -95,6 +103,9 @@ dependencies {
 
     // Logging
     implementation("com.jakewharton.timber:timber:$timber_version")
+
+    // Image Loader
+    implementation("io.coil-kt:coil:$coil_version")
 
     // Testing
     testImplementation("junit:junit:4.13.2")

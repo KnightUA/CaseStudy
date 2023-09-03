@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/items"
+    app:startDestination="@id/itemListFragment">
+
+    <fragment
+        android:id="@+id/itemListFragment"
+        android:name="ua.shtest.casestudy.presentation.view.ui.fragments.item.ItemListFragment"
+        android:label="Item List"
+        tools:layout="@layout/fragment_item_list">
+        <action
+            android:id="@+id/action_to_itemDetails"
+            app:destination="@id/itemDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/itemDetailsFragment"
+        android:name="ua.shtest.casestudy.presentation.view.ui.fragments.item.ItemDetailsFragment"
+        android:label="Item Details"
+        tools:layout="@layout/fragment_item_details">
+
+        <argument
+            android:name="item"
+            app:argType="ua.shtest.casestudy.domain.model.Item" />
+
+        <argument
+            android:name="editMode"
+            app:argType="boolean" />
+    </fragment>
+</navigation>
